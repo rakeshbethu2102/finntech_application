@@ -1,29 +1,53 @@
+import { useNavigate } from "react-router-dom";
+import "./navbar.css";
 function Navbar() {
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("fintechUser"));
+  
+  const handleLogout = () => {
+    localStorage.removeItem("fintechUser");
+    navigate("/login");
+  };
+
   return (
-    <div style={styles.nav}>
-      <h3>Dashboard</h3>
-      <button style={styles.btn}>Logout</button>
+    <div className="nav">
+      <div className="nav-left">
+        <h3 className="nav-title">💰 FinTech Dashboard</h3>
+        <div className="nav-links">
+          <button 
+            className="nav-link" 
+            onClick={() => navigate("/dashboard")}
+          >
+            📊 Dashboard
+          </button>
+          {["analyst", "admin"].includes(user?.role) && (
+            <button 
+              className="nav-link" 
+              onClick={() => navigate("/user-list")}
+            >
+              👥 Users
+            </button>
+          )}
+          {user?.role === "admin" && (
+            <button 
+              className="nav-link" 
+              onClick={() => navigate("/user-management")}
+            >
+              ⚙️ Manage
+            </button>
+          )}
+        </div>
+      </div>
+      <div className="nav-right">
+        <span className="user-info">
+          {user?.name} <span className={`role-badge role-${user?.role}`}>{user?.role}</span>
+        </span>
+        <button className="nav-btn logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
     </div>
   );
 }
-
-const styles = {
-  nav: {
-    height: "60px",
-    background: "#fff",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "0 20px",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-  },
-  btn: {
-    padding: "8px 15px",
-    border: "none",
-    background: "#667eea",
-    color: "#fff",
-    borderRadius: "6px",
-  },
-};
 
 export default Navbar;

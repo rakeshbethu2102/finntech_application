@@ -1,0 +1,264 @@
+.user-management-container {
+  padding: 20px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.management-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.management-header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.management-header p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 16px;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.btn-back {
+  padding: 12px 18px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-back:hover {
+  background: white;
+  color: #667eea;
+  transform: translateY(-1px);
+}
+
+.error-message {
+  background-color: #fee;
+  color: #c00;
+  padding: 12px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  border-left: 4px solid #c00;
+}
+
+.success-message {
+  background-color: #efe;
+  color: #0a0;
+  padding: 12px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  border-left: 4px solid #0a0;
+}
+
+.no-users {
+  text-align: center;
+  color: #666;
+  padding: 60px 20px;
+  font-size: 18px;
+}
+
+.management-table {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.management-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.management-table thead {
+  background-color: #f9f9f9;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.management-table th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.management-table td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.management-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.role-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.role-viewer {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.role-analyst {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.role-admin {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.active {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+}
+
+.status-badge.inactive {
+  background-color: #ffccbc;
+  color: #d84315;
+}
+
+.edit-select {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.edit-select:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.edit-role-btn,
+.edit-status-btn,
+.delete-btn,
+.save-btn,
+.cancel-btn {
+  padding: 6px 12px;
+  margin: 0 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+}
+
+.edit-role-btn {
+  background-color: #2196f3;
+  color: white;
+}
+
+.edit-role-btn:hover {
+  background-color: #1976d2;
+}
+
+.edit-status-btn {
+  background-color: #ff9800;
+  color: white;
+}
+
+.edit-status-btn:hover {
+  background-color: #f57c00;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #da190b;
+}
+
+.save-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #45a049;
+}
+
+.cancel-btn {
+  background-color: #999;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #777;
+}
+
+@media (max-width: 768px) {
+  .management-table {
+    overflow-x: auto;
+  }
+
+  .management-table table {
+    min-width: 600px;
+  }
+
+  .edit-role-btn,
+  .edit-status-btn,
+  .delete-btn,
+  .save-btn,
+  .cancel-btn {
+    padding: 4px 8px;
+    margin: 2px;
+    font-size: 10px;
+  }
+}
+.header-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
