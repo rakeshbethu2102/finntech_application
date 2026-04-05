@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const connectDB = require("./config/db");
 
 const app = express();
 const cors = require("cors");
@@ -33,10 +34,20 @@ app.use((req, res) => {
 
 const PORT = process.env.PORT || 5000;
 if (!process.env.VERCEL) {
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-  });
+  const startServer = async () => {
+    try {
+      await connectDB();
+      app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+        console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+      });
+    } catch (error) {
+      console.error("Failed to start server:", error.message);
+      process.exit(1);
+    }
+  };
+
+  startServer();
 }
 
 module.exports = app;
