@@ -562,6 +562,104 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 640px) {
+  .main {
+    flex-direction: column;
+  }
+
+  .content {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .dashboard-header,
+  .stats-grid,
+  .charts-section,
+  .recent-activity,
+  .alert {
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .header-content {
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-link {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stat-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .chart-container,
+  .welcome-card,
+  .stat-card,
+  .recent-activity {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .chart-wrapper {
+    height: 260px;
+  }
+
+  .activity-item {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .activity-amount {
+    width: 100%;
+    text-align: left;
+    padding-left: 56px;
+  }
+}
+
+@media (max-width: 420px) {
+  .dashboard-header {
+    padding: 20px 16px;
+  }
+
+  .welcome-message h1 {
+    font-size: 1.35rem;
+    word-break: break-word;
+  }
+
+  .subtitle,
+  .chart-subtitle,
+  .activity-meta {
+    font-size: 0.85rem;
+  }
+
+  .stats-grid {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .chart-card,
+  .activity-header,
+  .activity-item,
+  .empty-state {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
 .btn-add:hover {
   transform: translateY(-8px);
   box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);

@@ -122,20 +122,20 @@ export default function UserList() {
               <tbody>
                 {filteredUsers.map((usr) => (
                   <tr key={usr._id}>
-                    <td>{usr.name}</td>
-                    <td>{usr.email}</td>
-                    <td>
+                    <td data-label="Name">{usr.name}</td>
+                    <td data-label="Email">{usr.email}</td>
+                    <td data-label="Role">
                       <span className={`role-badge role-${usr.role}`}>
                         {usr.role.toUpperCase()}
                       </span>
                     </td>
-                    <td>
+                    <td data-label="Status">
                       <span className={`status-badge ${usr.status}`}>
                         {usr.status.toUpperCase()}
                       </span>
                     </td>
-                    <td>{new Date(usr.createdAt).toLocaleDateString()}</td>
-                    <td>
+                    <td data-label="Joined">{new Date(usr.createdAt).toLocaleDateString()}</td>
+                    <td data-label="Actions">
                       <button
                         className="view-details-btn"
                         onClick={() => handleViewDetails(usr._id)}

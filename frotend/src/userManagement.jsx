@@ -166,9 +166,9 @@ export default function UserManagement() {
             <tbody>
               {users.map((usr) => (
                 <tr key={usr._id}>
-                  <td>{usr.name}</td>
-                  <td>{usr.email}</td>
-                  <td>
+                  <td data-label="Name">{usr.name}</td>
+                  <td data-label="Email">{usr.email}</td>
+                  <td data-label="Role">
                     {editingId === usr._id && editingField === "role" ? (
                       <select
                         className="edit-select"
@@ -185,7 +185,7 @@ export default function UserManagement() {
                       </span>
                     )}
                   </td>
-                  <td>
+                  <td data-label="Status">
                     {editingId === usr._id && editingField === "status" ? (
                       <select
                         className="edit-select"
@@ -201,8 +201,8 @@ export default function UserManagement() {
                       </span>
                     )}
                   </td>
-                  <td>{new Date(usr.createdAt).toLocaleDateString()}</td>
-                  <td>
+                  <td data-label="Joined">{new Date(usr.createdAt).toLocaleDateString()}</td>
+                  <td data-label="Actions">
                     {editingId === usr._id ? (
                       <>
                         <button
