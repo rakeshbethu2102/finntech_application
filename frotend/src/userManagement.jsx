@@ -203,6 +203,7 @@ export default function UserManagement() {
                   </td>
                   <td data-label="Joined">{new Date(usr.createdAt).toLocaleDateString()}</td>
                   <td data-label="Actions">
+                    <div className="action-buttons">
                     {editingId === usr._id ? (
                       <>
                         <button
@@ -243,6 +244,7 @@ export default function UserManagement() {
                         </button>
                       </>
                     )}
+                    </div>
                   </td>
                 </tr>
               ))}

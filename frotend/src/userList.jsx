@@ -65,19 +65,12 @@ export default function UserList() {
 
   return (
     <div className="user-list-container">
-      <div className="page-header">
-        <button className="btn-dashboard" onClick={() => navigate("/dashboard")}>
-          ← Back to Dashboard
-        </button>
-        <h1 className="page-title">User Management</h1>
-      </div>
-
       <div className="user-list-header">
         <div className="header-left">
           <div>
+            <h1 className="page-title">User Management</h1>
             <p className="header-subtitle">Browse users, inspect roles, and track account status.</p>
           </div>
-          <button className="btn-back" onClick={() => navigate("/dashboard")}>← Back to Dashboard</button>
         </div>
 
         <div className="header-right">
@@ -87,11 +80,14 @@ export default function UserList() {
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by name, email, role or status"
           />
-          {user.role === "admin" && (
-            <Link to="/user-management" className="management-button">
-              ⚙️ Manage Users
-            </Link>
-          )}
+          <div className="header-actions">
+            <button className="btn-back" onClick={() => navigate("/dashboard")}>← Dashboard</button>
+            {user.role === "admin" && (
+              <Link to="/user-management" className="management-button">
+                ⚙️ Manage Users
+              </Link>
+            )}
+          </div>
         </div>
       </div>
 

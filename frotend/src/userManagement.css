@@ -4,6 +4,8 @@
   min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .management-header {
@@ -14,7 +16,7 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   padding: 28px;
-  border-radius: 16px;
+  border-radius: 18px;
   margin-bottom: 24px;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
 }
@@ -45,9 +47,9 @@
 
 .btn-back {
   padding: 12px 18px;
-  border: 2px solid rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
+  border: 1px solid #1e40af;
+  background: #1d4ed8;
+  color: #ffffff;
   border-radius: 10px;
   font-size: 14px;
   font-weight: 700;
@@ -56,9 +58,18 @@
 }
 
 .btn-back:hover {
-  background: white;
-  color: #667eea;
+  background: #1e40af;
+  color: #ffffff;
   transform: translateY(-1px);
+}
+
+.btn-back:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.35);
+}
+
+.btn-back:active {
+  background: #1e3a8a;
 }
 
 .error-message,
@@ -89,7 +100,7 @@
 
 .management-table {
   background-color: rgba(255, 255, 255, 0.96);
-  border-radius: 16px;
+  border-radius: 14px;
   box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
   overflow: hidden;
 }
@@ -115,6 +126,7 @@
 .management-table td {
   padding: 15px;
   border-bottom: 1px solid #eef2f7;
+  vertical-align: top;
 }
 
 .management-table tbody tr:hover {
@@ -253,6 +265,14 @@
   min-width: 860px;
 }
 
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  justify-content: flex-start;
+}
+
 @media (max-width: 1024px) {
   .management-header {
     flex-direction: column;
@@ -275,57 +295,13 @@
   }
 
   .management-table {
-    overflow: visible;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .management-table table,
-  .management-table thead,
-  .management-table tbody,
-  .management-table th,
-  .management-table td,
-  .management-table tr {
-    display: block;
-    width: 100%;
-  }
-
-  .management-table thead {
-    display: none;
-  }
-
-  .management-table tbody tr {
-    background: #fff;
-    border-radius: 14px;
-    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
-    margin-bottom: 14px;
-    overflow: hidden;
-  }
-
-  .management-table td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 14px;
-    border-bottom: 1px solid #eef2f7;
-    text-align: right;
-  }
-
-  .management-table td::before {
-    content: attr(data-label);
-    font-weight: 700;
-    color: #475569;
-    text-align: left;
-    flex: 0 0 40%;
-  }
-
-  .management-table td[data-label="Actions"] {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .management-table td[data-label="Actions"]::before {
-    margin-bottom: 4px;
-    flex-basis: auto;
+  .management-table table {
+    min-width: 860px;
   }
 
   .edit-role-btn,
@@ -333,22 +309,55 @@
   .delete-btn,
   .save-btn,
   .cancel-btn {
-    width: 100%;
+    width: auto;
     margin-right: 0;
   }
 
   .edit-select {
     max-width: none;
   }
+
+  .action-buttons {
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .action-buttons button {
+    width: auto;
+    margin: 0;
+    white-space: nowrap;
+  }
 }
 
 @media (max-width: 420px) {
+  .user-management-container {
+    padding: 12px;
+  }
+
+  .management-header {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
   .management-header h1 {
     font-size: 22px;
   }
 
   .management-header p {
     font-size: 14px;
+  }
+
+  .management-table td {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .edit-select {
+    font-size: 12px;
+  }
+
+  .action-buttons button {
+    width: auto;
   }
 
   .btn-back {
