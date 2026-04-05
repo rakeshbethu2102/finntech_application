@@ -16,6 +16,30 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// Root route for deployment checks
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    message: "FinTech backend is running",
+    health: "/health",
+    apiBase: "/api"
+  });
+});
+
+// API index route for quick verification
+app.get("/api", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    message: "API is reachable",
+    endpoints: {
+      auth: "/api/auth",
+      transactions: "/api/transactions",
+      dashboard: "/api/dashboard",
+      users: "/api/users"
+    }
+  });
+});
+
 // API Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/transactions", require("./routes/transactionRoutes"));
