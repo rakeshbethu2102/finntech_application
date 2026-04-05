@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./addTransaction.css";
+import { apiUrl } from "./api";
 
 function AddTransaction() {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ function AddTransaction() {
       notes: formData.notes,
     };
 
-    fetch("http://localhost:5000/api/transactions", {
+    fetch(apiUrl("/api/transactions"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

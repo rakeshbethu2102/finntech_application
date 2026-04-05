@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./userManagement.css";
+import { apiUrl } from "./api";
 
 export default function UserManagement() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function UserManagement() {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/users", {
+      const response = await fetch(apiUrl("/api/users"), {
         headers: {
           "x-user-role": "admin",
         },
@@ -56,7 +57,7 @@ export default function UserManagement() {
     try {
       const endpoint = editingField === "status" ? "status" : "role";
       const response = await fetch(
-        `http://localhost:5000/api/users/${userId}/${endpoint}`,
+        apiUrl(`/api/users/${userId}/${endpoint}`),
         {
           method: "PUT",
           headers: {
@@ -101,7 +102,7 @@ export default function UserManagement() {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/users/${userId}`, {
+      const response = await fetch(apiUrl(`/api/users/${userId}`), {
         method: "DELETE",
         headers: {
           "x-user-role": "admin",

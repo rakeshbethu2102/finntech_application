@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "./sidebar";
 import Navbar from "./navbar";
 import "./dashboard.css";
+import { apiUrl } from "./api";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend
@@ -30,7 +31,7 @@ function Dashboard() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/dashboard/summary?role=${storedUser.role}&userId=${storedUser._id}`
+        apiUrl(`/api/dashboard/summary?role=${storedUser.role}&userId=${storedUser._id}`)
       );
       const data = await response.json();
       if (!data.success) {

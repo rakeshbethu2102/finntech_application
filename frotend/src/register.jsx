@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./register.css";
+import { apiUrl } from "./api";
 
 function Register() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function Register() {
   const handleSubmit = (e) => {
   e.preventDefault();
 
-  fetch("http://localhost:5000/api/auth/register", {
+  fetch(apiUrl("/api/auth/register"), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

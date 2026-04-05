@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./userDetails.css";
+import { apiUrl } from "./api";
 
 export default function UserDetails() {
   const { userId } = useParams();
@@ -23,7 +24,7 @@ export default function UserDetails() {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:5000/api/users/${userId}/transactions`,
+        apiUrl(`/api/users/${userId}/transactions`),
         {
           headers: {
             "x-user-role": user.role,

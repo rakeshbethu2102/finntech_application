@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./userList.css";
+import { apiUrl } from "./api";
 
 export default function UserList() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function UserList() {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/users", {
+      const response = await fetch(apiUrl("/api/users"), {
         headers: {
           "x-user-role": user.role,
         },
