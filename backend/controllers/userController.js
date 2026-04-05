@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const { ROLE_VALUES, STATUS_VALUES, isValidObjectId } = require("../utils/validation");
 
 // Get all users (for admin/analyst to view)
 exports.getAllUsers = async (req, res) => {
@@ -15,6 +16,11 @@ exports.getAllUsers = async (req, res) => {
 exports.getUserById = async (req, res) => {
   try {
     const { id } = req.params;
+
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({ success: false, message: "User id is invalid" });
+    }
+
     const user = await User.findById(id, { password: 0 });
     
     if (!user) {
@@ -34,7 +40,11 @@ exports.updateUserStatus = async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 
-    if (!["active", "inactive"].includes(status)) {
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({ success: false, message: "User id is invalid" });
+    }
+
+    if (!STATUS_VALUES.includes(status)) {
       return res.status(400).json({ success: false, message: "Invalid status" });
     }
 
@@ -61,7 +71,11 @@ exports.updateUserRole = async (req, res) => {
     const { id } = req.params;
     const { role } = req.body;
 
-    if (!["viewer", "analyst", "admin"].includes(role)) {
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({ success: false, message: "User id is invalid" });
+    }
+
+    if (!ROLE_VALUES.includes(role)) {
       return res.status(400).json({ success: false, message: "Invalid role" });
     }
 
@@ -87,6 +101,10 @@ exports.getUserWithTransactions = async (req, res) => {
   try {
     const { userId } = req.params;
     const Transaction = require("../models/transaction");
+
+    if (!isValidObjectId(userId)) {
+      return res.status(400).json({ success: false, message: "User id is invalid" });
+    }
 
     const user = await User.findById(userId, { password: 0 });
     if (!user) {
@@ -133,15 +151,31 @@ exports.deleteUser = async (req, res) => {
     const { id } = req.params;
     const Transaction = require("../models/transaction");
 
-    // Delete user's transactions first
-    await Transaction.deleteMany({ userId: id });
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({ success: false, message: "User id is invalid" });
+    }
 
-    // Delete user
-    const user = await User.findByIdAndDelete(id);
+    const user = await User.findById(id);
 
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found" });
     }
+
+    if (user.role === "admin") {
+      const adminCount = await User.countDocuments({ role: "admin" });
+      if (adminCount <= 1) {
+        return res.status(409).json({
+          success: false,
+          message: "Cannot delete the last admin user",
+        });
+      }
+    }
+
+    // Delete user's transactions first
+    await Transaction.deleteMany({ userId: id });
+
+    // Delete user
+    await User.findByIdAndDelete(id);
 
     res.json({ success: true, message: "User deleted successfully" });
   } catch (err) {

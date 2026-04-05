@@ -1,15 +1,24 @@
 const Transaction = require("../models/transaction");
+const { buildDateRangeFilter, isValidObjectId } = require("../utils/validation");
 
 exports.getSummary = async (req, res) => {
   try {
     const { userId, startDate, endDate } = req.query;
     const filter = {};
 
-    if (userId) filter.userId = userId;
-    if (startDate || endDate) {
-      filter.date = {};
-      if (startDate) filter.date.$gte = new Date(startDate);
-      if (endDate) filter.date.$lte = new Date(endDate);
+    if (userId) {
+      if (!isValidObjectId(userId)) {
+        return res.status(400).json({ success: false, message: "userId must be a valid id" });
+      }
+      filter.userId = userId;
+    }
+
+    const dateRange = buildDateRangeFilter(startDate, endDate);
+    if (!dateRange.ok) {
+      return res.status(400).json({ success: false, message: dateRange.message });
+    }
+    if (dateRange.filter) {
+      filter.date = dateRange.filter;
     }
 
     const transactions = await Transaction.find(filter).sort({ date: -1 });

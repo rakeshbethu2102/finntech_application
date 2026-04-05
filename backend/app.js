@@ -33,7 +33,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(express.json());
+app.use(express.json({ limit: "1mb" }));
 
 // Root route for deployment checks
 app.get("/", (req, res) => {
@@ -73,6 +73,29 @@ app.get("/health", (req, res) => {
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
+});
+
+// Global error handler for JSON parse errors, CORS errors, and unexpected failures
+app.use((err, req, res, next) => {
+  if (err && err.type === "entity.parse.failed") {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid JSON in request body",
+    });
+  }
+
+  if (err && err.message === "Not allowed by CORS") {
+    return res.status(403).json({
+      success: false,
+      message: "Origin is not allowed by CORS policy",
+    });
+  }
+
+  console.error(err);
+  return res.status(500).json({
+    success: false,
+    message: "Internal server error",
+  });
 });
 
 const PORT = process.env.PORT || 5000;
